@@ -32,3 +32,22 @@ body {
     color: white !important;
     font-weight: 500;
 }
+
+.width-100 {
+    width: 100%;
+}
+
+
+.quiz-end {
+    text-align: center;
+}
+
+
+.end-score {
+    text-align: center;
+    transform: translateY(-240px);
+}
+
+.winner-img {
+    
+}

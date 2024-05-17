@@ -24,19 +24,19 @@ let questions = [
         'right_answer': 4
     },
     {
-        'question': 'sialala',
-        'answer_1': 'asd',
-        'answer_2': 'fgh',
-        'answer_3': 'jkl',
-        'answer_4': 'yxc',
+        'question': 'Was bedeutet HTML ausgeschrieben',
+        'answer_1': 'Hardware Trends Manager List',
+        'answer_2': 'Hypertext Main Logic',
+        'answer_3': 'Highend Text Manager Language',
+        'answer_4': 'Hypertext Markup Language',
         'right_answer': 4
     },
     {
-        'question': 'sialala',
-        'answer_1': 'asd',
-        'answer_2': 'fgh',
-        'answer_3': 'jkl',
-        'answer_4': 'yxc',
+        'question': 'Wofür steht das HTML-Tag "a"?',
+        'answer_1': 'Link',
+        'answer_2': 'Bild',
+        'answer_3': 'Text in Fettschrift',
+        'answer_4': 'CSS-Class',
         'right_answer': 1
     }
 ];
@@ -63,12 +63,24 @@ function generateQuestionFooter() {
 
 
 function showQuestion() {
+
+    if(currentQuestion >= questions.length) {
+        document.getElementById('questionBody').style.display = 'none';
+        document.getElementById('cardImgTop').style.display = 'none';
+        document.getElementById('endScreen').style.display = 'block';
+        endScreenScore();
+    }
     let question = questions[currentQuestion];
     document.getElementById('questionText').innerHTML = `${question['question']}`;
     document.getElementById('answer_1').innerHTML = `${question['answer_1']}`;
     document.getElementById('answer_2').innerHTML = `${question['answer_2']}`;
     document.getElementById('answer_3').innerHTML = `${question['answer_3']}`;
     document.getElementById('answer_4').innerHTML = `${question['answer_4']}`;
+    
+    document.getElementById('answer_1').onclick = function() { answer('answer_1'); };
+    document.getElementById('answer_2').onclick = function() { answer('answer_2'); };
+    document.getElementById('answer_3').onclick = function() { answer('answer_3'); };
+    document.getElementById('answer_4').onclick = function() { answer('answer_4'); };
 }
 
 
@@ -88,6 +100,15 @@ function answer(selection) {
         document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
     }
     nextQuestionButton.disabled = false;
+    removeOnclick();
+}
+
+
+function removeOnclick() {
+    document.getElementById('answer_1').onclick = null;
+    document.getElementById('answer_2').onclick = null;
+    document.getElementById('answer_3').onclick = null;
+    document.getElementById('answer_4').onclick = null;
 }
 
 
@@ -110,4 +131,10 @@ function resetAnswers() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+}
+
+
+function endScreenScore() {
+    document.getElementById('rightAnswersAmount').innerHTML = ``;
+    document.getElementById('questionsAmount').innerHTML = `${questions.length}`;
 }
