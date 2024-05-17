@@ -44,6 +44,8 @@ let questions = [
 
 let currentQuestion = 0;
 
+let rightAnswers = 0;
+
 
 function init() {
     let questionFooter = document.getElementById('questionFooter');
@@ -76,11 +78,7 @@ function showQuestion() {
     document.getElementById('answer_2').innerHTML = `${question['answer_2']}`;
     document.getElementById('answer_3').innerHTML = `${question['answer_3']}`;
     document.getElementById('answer_4').innerHTML = `${question['answer_4']}`;
-    
-    document.getElementById('answer_1').onclick = function() { answer('answer_1'); };
-    document.getElementById('answer_2').onclick = function() { answer('answer_2'); };
-    document.getElementById('answer_3').onclick = function() { answer('answer_3'); };
-    document.getElementById('answer_4').onclick = function() { answer('answer_4'); };
+    addOnclick();
 }
 
 
@@ -95,6 +93,7 @@ function answer(selection) {
     if (selectedAnswerNumber == question['right_answer']) {
         // selection in this case is the id of the card, parentNode means adding the class to the parrent element of the answer
         document.getElementById(selection).parentNode.classList.add('bg-success'); // bg-success is a bootstrap class
+        rightAnswers++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
@@ -109,6 +108,14 @@ function removeOnclick() {
     document.getElementById('answer_2').onclick = null;
     document.getElementById('answer_3').onclick = null;
     document.getElementById('answer_4').onclick = null;
+}
+
+
+function addOnclick() {
+    document.getElementById('answer_1').onclick = function() { answer('answer_1'); };
+    document.getElementById('answer_2').onclick = function() { answer('answer_2'); };
+    document.getElementById('answer_3').onclick = function() { answer('answer_3'); };
+    document.getElementById('answer_4').onclick = function() { answer('answer_4'); };
 }
 
 
@@ -135,6 +142,6 @@ function resetAnswers() {
 
 
 function endScreenScore() {
-    document.getElementById('rightAnswersAmount').innerHTML = ``;
+    document.getElementById('rightAnswersAmount').innerHTML = `${rightAnswers}`;
     document.getElementById('questionsAmount').innerHTML = `${questions.length}`;
 }
