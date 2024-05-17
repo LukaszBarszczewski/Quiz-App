@@ -40,6 +40,13 @@ body {
 
 .quiz-end {
     text-align: center;
+    border-bottom: 1px solid rgba(214, 176, 3, 0.5);
+    padding: 16px;
+}
+
+
+.quiz-end h1 {
+    color: rgb(214, 176, 3);
 }
 
 
@@ -48,6 +55,6 @@ body {
     transform: translateY(-240px);
 }
 
-.winner-img {
-    
+.end-screen {
+    background-color: rgb(248,249,250) !important;
 }

@@ -65,20 +65,23 @@ function generateQuestionFooter() {
 
 
 function showQuestion() {
-
-    if(currentQuestion >= questions.length) {
+    if (currentQuestion >= questions.length) {
         document.getElementById('questionBody').style.display = 'none';
         document.getElementById('cardImgTop').style.display = 'none';
         document.getElementById('endScreen').style.display = 'block';
         endScreenScore();
     }
-    let question = questions[currentQuestion];
-    document.getElementById('questionText').innerHTML = `${question['question']}`;
-    document.getElementById('answer_1').innerHTML = `${question['answer_1']}`;
-    document.getElementById('answer_2').innerHTML = `${question['answer_2']}`;
-    document.getElementById('answer_3').innerHTML = `${question['answer_3']}`;
-    document.getElementById('answer_4').innerHTML = `${question['answer_4']}`;
-    addOnclick();
+        let progressPercent = currentQuestion / questions.length;
+        progressPercent = Math.round(progressPercent * 100);
+        document.getElementById('progressBar').innerHTML = `${progressPercent}%`;
+        document.getElementById('progressBar').style.width = `${progressPercent}%`;
+        let question = questions[currentQuestion];
+        document.getElementById('questionText').innerHTML = `${question['question']}`;
+        document.getElementById('answer_1').innerHTML = `${question['answer_1']}`;
+        document.getElementById('answer_2').innerHTML = `${question['answer_2']}`;
+        document.getElementById('answer_3').innerHTML = `${question['answer_3']}`;
+        document.getElementById('answer_4').innerHTML = `${question['answer_4']}`;
+        addOnclick();
 }
 
 
@@ -112,10 +115,10 @@ function removeOnclick() {
 
 
 function addOnclick() {
-    document.getElementById('answer_1').onclick = function() { answer('answer_1'); };
-    document.getElementById('answer_2').onclick = function() { answer('answer_2'); };
-    document.getElementById('answer_3').onclick = function() { answer('answer_3'); };
-    document.getElementById('answer_4').onclick = function() { answer('answer_4'); };
+    document.getElementById('answer_1').onclick = function () { answer('answer_1'); };
+    document.getElementById('answer_2').onclick = function () { answer('answer_2'); };
+    document.getElementById('answer_3').onclick = function () { answer('answer_3'); };
+    document.getElementById('answer_4').onclick = function () { answer('answer_4'); };
 }
 
 
@@ -142,6 +145,6 @@ function resetAnswers() {
 
 
 function endScreenScore() {
-    document.getElementById('rightAnswersAmount').innerHTML = `${rightAnswers}`;
-    document.getElementById('questionsAmount').innerHTML = `${questions.length}`;
+    document.getElementById('rightAnswersAmount').innerHTML = rightAnswers;
+    document.getElementById('questionsAmount').innerHTML = questions.length;
 }
