@@ -51,6 +51,7 @@ function init() {
     let questionFooter = document.getElementById('questionFooter');
     questionFooter.innerHTML = generateQuestionFooter();
     showQuestion();
+    resetAnswers();
 }
 
 
@@ -71,17 +72,17 @@ function showQuestion() {
         document.getElementById('endScreen').style.display = 'block';
         endScreenScore();
     }
-        let progressPercent = currentQuestion / questions.length;
-        progressPercent = Math.round(progressPercent * 100);
-        document.getElementById('progressBar').innerHTML = `${progressPercent}%`;
-        document.getElementById('progressBar').style.width = `${progressPercent}%`;
-        let question = questions[currentQuestion];
-        document.getElementById('questionText').innerHTML = `${question['question']}`;
-        document.getElementById('answer_1').innerHTML = `${question['answer_1']}`;
-        document.getElementById('answer_2').innerHTML = `${question['answer_2']}`;
-        document.getElementById('answer_3').innerHTML = `${question['answer_3']}`;
-        document.getElementById('answer_4').innerHTML = `${question['answer_4']}`;
-        addOnclick();
+    let progressPercent = currentQuestion / questions.length;
+    progressPercent = Math.round(progressPercent * 100);
+    document.getElementById('progressBar').innerHTML = `${progressPercent}%`;
+    document.getElementById('progressBar').style.width = `${progressPercent}%`;
+    let question = questions[currentQuestion];
+    document.getElementById('questionText').innerHTML = `${question['question']}`;
+    document.getElementById('answer_1').innerHTML = `${question['answer_1']}`;
+    document.getElementById('answer_2').innerHTML = `${question['answer_2']}`;
+    document.getElementById('answer_3').innerHTML = `${question['answer_3']}`;
+    document.getElementById('answer_4').innerHTML = `${question['answer_4']}`;
+    addOnclick();
 }
 
 
@@ -147,4 +148,14 @@ function resetAnswers() {
 function endScreenScore() {
     document.getElementById('rightAnswersAmount').innerHTML = rightAnswers;
     document.getElementById('questionsAmount').innerHTML = questions.length;
+}
+
+
+function restartGame() {
+    document.getElementById('questionBody').style.display = 'block';
+    document.getElementById('cardImgTop').style.display = 'block';
+    document.getElementById('endScreen').style.display = 'none';
+    currentQuestion = 0;
+    rightAnswers = 0;
+    init();
 }
