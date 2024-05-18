@@ -71,8 +71,9 @@ function showQuestion() {
         document.getElementById('cardImgTop').style.display = 'none';
         document.getElementById('endScreen').style.display = 'block';
         endScreenScore();
+        return;
     }
-    let progressPercent = currentQuestion / questions.length;
+    let progressPercent = (currentQuestion + 1) / questions.length;
     progressPercent = Math.round(progressPercent * 100);
     document.getElementById('progressBar').innerHTML = `${progressPercent}%`;
     document.getElementById('progressBar').style.width = `${progressPercent}%`;
