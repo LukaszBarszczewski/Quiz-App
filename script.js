@@ -68,46 +68,71 @@ function generateQuestionFooter() {
 
 function showQuestion() {
     if (currentQuestion >= questions.length) {
-        document.getElementById('questionBody').style.display = 'none';
-        document.getElementById('cardImgTop').style.display = 'none';
-        document.getElementById('endScreen').style.display = 'block';
+        changeToEndScreen();
         endScreenScore();
         return;
     }
+    calculateProgressbar();
+    generateCurrentQuestion();
+    addOnclick();
+}
+
+
+function changeToEndScreen() {
+    document.getElementById('questionBody').style.display = 'none';
+    document.getElementById('cardImgTop').style.display = 'none';
+    document.getElementById('endScreen').style.display = 'block';
+}
+
+
+function calculateProgressbar() {
     let progressPercent = (currentQuestion + 1) / questions.length;
     progressPercent = Math.round(progressPercent * 100);
     document.getElementById('progressBar').innerHTML = `${progressPercent}%`;
     document.getElementById('progressBar').style.width = `${progressPercent}%`;
+}
+
+
+function generateCurrentQuestion() {
     let question = questions[currentQuestion];
     document.getElementById('questionText').innerHTML = `${question['question']}`;
     document.getElementById('answer_1').innerHTML = `${question['answer_1']}`;
     document.getElementById('answer_2').innerHTML = `${question['answer_2']}`;
     document.getElementById('answer_3').innerHTML = `${question['answer_3']}`;
     document.getElementById('answer_4').innerHTML = `${question['answer_4']}`;
-    addOnclick();
 }
-
 
 
 function answer(selection) {
     let question = questions[currentQuestion];
-    // slice(-1) - extract the last char of the string ('answer1'.slice(-1) = '1')
-    let selectedAnswerNumber = selection.slice(-1);
-    let rightAnswer = `answer_${question['right_answer']}`;
+    let selectedAnswerNumber = selection.slice(-1);     // slice(-1) - extract the last char of the string ('answer1'.slice(-1) = '1')
     let nextQuestionButton = document.getElementById('nextQuestionButton');
-    // check if the number of the selected answer is the same as the number in 'right_answer'
-    if (selectedAnswerNumber == question['right_answer']) {
-        // selection in this case is the id of the card, parentNode means adding the class to the parrent element of the answer
-        document.getElementById(selection).parentNode.classList.add('bg-success'); // bg-success is a bootstrap class
-        AUDIO_SUCCESS.play();
-        rightAnswers++;
+    
+    if (selectedAnswerNumber == question['right_answer']) {     // check if the number of the selected answer is the same as the number in 'right_answer'
+        confirmRightAnswer(selection);
     } else {
-        document.getElementById(selection).parentNode.classList.add('bg-danger');
-        document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
-        AUDIO_FAIL.play();
+        confirmWrongAnswer(selection);
     }
     nextQuestionButton.disabled = false;
     removeOnclick();
+}
+
+
+function confirmRightAnswer(selection) {
+    // selection in this case is the id of the card, parentNode means adding the class to the parrent element of the answer
+    document.getElementById(selection).parentNode.classList.add('bg-success'); // bg-success is a bootstrap class
+    AUDIO_SUCCESS.play();
+    rightAnswers++;
+}
+
+
+function confirmWrongAnswer(selection) {
+    let question = questions[currentQuestion];
+    let rightAnswer = `answer_${question['right_answer']}`;
+
+    document.getElementById(selection).parentNode.classList.add('bg-danger');
+    document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
+    AUDIO_FAIL.play();
 }
 
 
