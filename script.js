@@ -43,8 +43,9 @@ let questions = [
 
 
 let currentQuestion = 0;
-
 let rightAnswers = 0;
+let AUDIO_SUCCESS = new Audio('audio/right_answer.mp3');
+let AUDIO_FAIL = new Audio('audio/wrong_answer.mp3');
 
 
 function init() {
@@ -98,10 +99,12 @@ function answer(selection) {
     if (selectedAnswerNumber == question['right_answer']) {
         // selection in this case is the id of the card, parentNode means adding the class to the parrent element of the answer
         document.getElementById(selection).parentNode.classList.add('bg-success'); // bg-success is a bootstrap class
+        AUDIO_SUCCESS.play();
         rightAnswers++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
+        AUDIO_FAIL.play();
     }
     nextQuestionButton.disabled = false;
     removeOnclick();
