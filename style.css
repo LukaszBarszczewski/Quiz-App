@@ -1,13 +1,14 @@
 body {
    margin: 0;
+   overflow-y: hidden;
 }
 
 .img-card {
-    background-color: #0d6efd;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #198754;
+    height: 100vh;
 }
 
 .card {
@@ -15,8 +16,8 @@ body {
 }
 
 .answer-card:hover {
-    cursor: pointer;
     background-color: rgba(0,0,0,0.05);
+    cursor: pointer;
     font-weight: 500;
 }
 
@@ -37,18 +38,15 @@ body {
     width: 100%;
 }
 
-
 .quiz-end {
-    text-align: center;
     border-bottom: 1px solid rgba(214, 176, 3, 0.5);
     padding: 16px;
+    text-align: center;
 }
-
 
 .quiz-end h1 {
     color: rgb(214, 176, 3);
 }
-
 
 .end-score {
     text-align: center;

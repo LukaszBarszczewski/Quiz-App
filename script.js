@@ -72,10 +72,10 @@ function showQuestion() {
         endScreenScore();
         return;
     }
-    calculateProgressbar();
-    generateCurrentQuestion();
-    addOnclick();
-}
+        calculateProgressbar();
+        generateCurrentQuestion();
+        addOnclick();
+}   
 
 
 function changeToEndScreen() {
@@ -150,7 +150,6 @@ function addOnclick() {
     document.getElementById('answer_3').onclick = function () { answer('answer_3'); };
     document.getElementById('answer_4').onclick = function () { answer('answer_4'); };
 }
-
 
 
 function nextQuestion() {
