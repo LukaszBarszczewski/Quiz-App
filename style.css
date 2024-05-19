@@ -7,8 +7,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #198754;
+    background: linear-gradient(135deg, #004d00 0%, #66b266 35%, #ccffcc 100%);
     height: 100vh;
+    padding: 0 32px;
 }
 
 .card {
@@ -49,6 +50,7 @@ body {
 }
 
 .end-score {
+    color: rgb(214, 176, 3);
     text-align: center;
     transform: translateY(-240px);
 }
@@ -61,4 +63,10 @@ body {
     display: flex;
     justify-content: center;
     margin: 32px 0;
+}
+
+@media(max-width: 540px) {
+    .end-score {
+        transform: translateY(0);
+    }
 }
